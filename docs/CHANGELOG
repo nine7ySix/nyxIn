@@ -1,0 +1,262 @@
+
+
+						nyxIn Changelog
+
+0.8
+-----------
+July 21, 2012
+	[Notes]
+		- First version on Github
+
+	[Additions]
+        - Allow organization of galleries (order_int)
+        - Added change of password for staff members
+        - Admin can change anyone's password
+
+	[Changes]
+		- Changed version to have 2 decimal places, 3 was too extreme
+
+	[Bugs Fixes]
+
+	[Planned] (No order of priority)
+		- Re-clean up code for version 1
+		- Window Mode
+		- Add links on Gallery if logged in for convience
+		- Seperate individual actions permissions
+		- Fix Time issue on {s}
+		- Add Installation process
+        - Figure out security issues for Ajax files
+        	- Set password to that of the gallery and pass password through Ajax
+        - Figure out dynamic locked gallery authentication
+        - Implement download option ("http://en.php.net/manual/en/class.ziparchive.php")
+
+0.7
+-----------
+July 16, 2012
+	[Notes]
+		- If a class is deleted, members are automatically placed into the BANNED class, with no permissions
+
+	[Additions]
+        - Allow deletion of individual moving of images
+		- Added BANNED class (Permissions fixed for Banned class)
+		- Allow deletion of staff members and staff classes
+		- Added ability to promote/demote staff members
+        - Allow moving of individual moving of images
+        - If images are moved into an empty gallery, first image will be used as thumbnail
+
+	[Changes]
+		- Addeed number of unmoderated images on Admin Panel
+
+	[Bugs Fixes]
+		- Fixed an issue with Editting permissions for Admin class
+
+	[Planned] (No order of priority)
+		- Add Installation process
+        - Allow organization of galleries (order_int
+        - Add announcements
+        - Add change of password for staff members
+        - Figure out security issues for Ajax files
+        	- Set password to that of the gallery and pass password through Ajax
+        - Figure out dynamic locked gallery authentication
+        - Implement download option ("http://en.php.net/manual/en/class.ziparchive.php")
+
+0.6
+-----------
+July 14, 2012
+	[Notes]
+
+	[Additions]
+		- LICENSE file states that nyxIn is to be released under a GPL 3.0 LICENSE
+		- Added option to organize the order in which the images are shown
+		- Added authentication on reset.php page
+		- Implemented ability to delete galleries and their images (Note: Delete does not remove anything, thigns are simply hidden from view)
+		- Added View Gallery During Maintenance permission
+	
+	[Changes]
+		- Removed "Powered by" in Footer
+
+	[Bugs Fixes]
+		- Changed !== to != where it caused problems
+
+	[Planned] (No order of priority)
+        - Allow removal and mass/individual moving of images
+        - Figure out security issues for Ajax files
+        	- Set password to that of the gallery and pass password through Ajax
+        - Figure out dynamic locked gallery authentication
+        - Implement download option ("http://en.php.net/manual/en/class.ziparchive.php")
+
+0.5
+-----------
+July 13, 2012
+	[Notes]
+		- Update focuses on cleanup and commenting instead of addition of features
+
+	[Additions]
+		- Summary for all major files completed
+        - Cleaned-up existing code (make more consistent) 
+        - Added naming convensions to DEV
+        - Drafted INSTALL
+        - Made the displaying of images more consistant
+
+	[Changes]
+		- Seperated the views for {g}, {s} and {i}
+
+	[Bugs Fixes]
+		- Typo on username/password on reset page.
+		- Fixed PHP shorthand notation usage
+
+	[Planned] (No order of priority)
+		- Add authentication on reset.php page
+        - Write LICENSE file
+        - Allow removal and mass/individual moving of images
+        - Add removal for (staff/images/galleries) [instead of deleting, just hide]
+        - Allow ordering of galleries/images
+        - Figure out security issues for Ajax files
+        	- Set password to that of the gallery and pass password through Ajax
+        - Figure out dynamic locked gallery authentication
+        - Implement download option ("http://en.php.net/manual/en/class.ziparchive.php")
+
+0.4
+-----------
+July 12, 2012
+	[Notes]
+		- No deletion component for anything (images/classes/staff) have been implemented yet
+			- Should hide or delete?
+
+	[Additions]
+		- Implemented Maintenance Mode
+		- Added moderation page
+		- Added preferences page
+		- Added "Display Moderated Images Only" on {g}
+
+	[Changes]
+        - Changed default value of thumbnail width from 150px to 450px
+        - Changed all 'users' to 'staff' (including db)
+        - Changed `shorthand_name` on permissions to `shorthand`
+        - Moved all documents into docs/ folder
+        - Columns and thumbnail width (renamed thumbnail_length) have both been moved to the preference page
+        - Reset creates an account with username: Admin and password: p account when reset
+
+	[Bugs Fixes]
+
+	[Planned] (No order of priority)
+		||~~~~~TOP PRIORITY~~~~~|| 
+        - Cleanup existing code (make more consistent) 
+       		- Password gallery checking on {g}
+        	- Possibly seperate ajax.php into several .php files and use <?php require ?>
+        	- Variable names and SQL query names
+        	- Reorganize files better
+        	- Write conventions into DEV NOTES file
+
+		- Add authentication on reset.php page
+        - Write INSTALL file
+        - Write LICENSE file
+        - Add commenting on files
+        - Allow removal and mass/individual moving of images
+        - Allow ordering of galleries/images
+        - Figure out security issues for Ajax files
+        - Figure out dynamic locked gallery authentication
+        - Implement download option ("http://en.php.net/manual/en/class.ziparchive.php")
+
+0.3
+-----------
+July 12, 2012
+	[Notes]
+        - User/Class system incomplete, missing promoting, demoting and deleting components
+
+	[Additions]
+        - Added option to reset Images/Galleries or Installation on Reset Admin Page
+        - Implemented auto thumbnail creation (width specified in core/variables.php)
+		- Number of Views and Filesize displayed on {i}
+		- Implemented User/Class System
+			- Create Staff
+			- Place into classes
+				- Permission of classes can be changed
+			- Authentication works along with User/Class system
+			- Class system uses JSON to format permissions
+
+	[Changes]
+        - Changed some variable names for references
+		- Changed "Root"s to "Home"
+        - Added "Views" on Top15
+		- Added "Home" to navigation bar
+        - During upload process, if gallery has no thumbnail image, default as first uploaded image
+        - Reset creates an account with username: nine7ySix and password: p account when reset, for development only
+
+	[Bugs Fixes]
+        - Moved view++ code on {i}, so view would update before displayed
+        - Fixed Root upload error
+
+	[Planned] (No order of priority)
+		- Add preferences DB
+			- Store columns, show_images_without_moderation etc.
+		- Implement promotion, demotion, deletion components for User/Class system
+		- Change SQL queries (instead of SELECT name, use SELECT c.name etc.)
+        - Write INSTALL file
+        - Write LICENSE file
+        - Cleanup existing code (make more consistent)
+            - Password gallery checking on {g}
+            - Possibly seperate ajax.php into several .php files and use <?php require ?>
+        - Add commenting on files
+        - Allow removal and mass/individual moving of images
+        - Allow ordering of galleries/images
+        - Figure out security issues for Ajax files
+        - Figure out dynamic locked gallery authentication
+        - Add 
+        - Change all 'users' to 'staff'
+        - Implement download option ("http://en.php.net/manual/en/class.ziparchive.php")
+
+0.2
+-----------
+July 11, 2012
+
+	[Notes]
+
+	[Additions]
+		- Added Reset page on Admin Panel, useful for testing/debugging
+		- Implemented thumbnail system
+		- Implemented password protected {g}
+		- Added Stats page
+			- Gallery Age, Gallery Birthday, Total Image Views, Number of Galleries + Sub Galleries
+			- Top15 Viewed Images
+		- Wrote validations for Admin pages
+		- README file drafted
+
+	[Changes]
+		- Changed some variable names for references
+		- Expanded Gallery Customization on Admin page
+		- Expanded Gallery Management on Admin page
+		- Minor CSS changes
+
+	[Bugs Fixes]
+		- Upload form socket error fixed
+
+	[Planned] (No order of priority)
+		- Improve thumbnail system
+		- Write INSTALL file
+		- Write LICENSE file
+		- Cleanup existing code (make more consistent)
+		- Add commenting on files
+		- Allow removal and mass/individual moving of images
+		- Allow ordering of galleries/images
+		- Figure out security issues for Ajax files
+
+0.1
+-----------
+July 10, 2012
+
+	[Notes]
+
+	[Planned]
+		- Write README
+		- Write Changelog
+		- Fix upload form
+		- Implement password protected galleries
+		- Implement thumbnail system
+		- Add validation to Admin files
+		- Add stats page {s} [Top xx Images, Metadata etc.]
+		- Update Gallery Management and Gallery Customization Admin pages
+		- Cleanup existing code (make more consistent)
+		- Add commenting on files
+		- Allow removal and mass/individual moving of images
+		- Allow ordering of galleries/images

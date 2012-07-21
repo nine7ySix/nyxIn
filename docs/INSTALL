@@ -1,0 +1,114 @@
+
+                        nyxIn Install
+  
+  Overview
+  --------------------
+
+  The installation process of nyxIn is extremely easy. Essentially, only two
+  lines need to be placed in a .php file (which will act as the enclosing
+  file for nyxIn).
+
+  Requirements
+  ------------
+
+  1. Access to a server with support for PHP
+  2. Access to a mySQL server
+
+  Step By Step Guide
+  ------------------
+
+  This tutorial assumes that nyxIn is being loaded into a file called gallery.php
+
+  1. Place nyxIn into the same folder as gallery.php
+  2. Open gallery.php and add the nyxIn.css stylesheet link into the <head></head> tags of the file
+  3. Between the <div></div> tags, 
+  2. Set the permissions for the folder nyxIn/uploads to ---
+  3. Run the following SQL QUERIES and open the file using am Internet Browser
+
+=======================================================================================================================================
+	CREATE TABLE `nyxIn_classes` (
+	`id` int(11) NOT NULL AUTO_INCREMENT,
+	`name` varchar(32) NOT NULL,
+	`permissions` text NOT NULL,
+	PRIMARY KEY (`id`),
+	UNIQUE KEY `name` (`name`)
+	) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+
+	INSERT INTO `nyxIn_classes` VALUES(1, 'Administrator', '{"1":"1","2":"1","3":"1","4":"1","5":"1","6":"1","7":"1","8":"1"}');
+	INSERT INTO `nyxIn_classes` VALUES(2, 'Uploader', '{"1":"1","2":"0","3":"0","4":"0","5":"0","6":"0","7":"0","8":"0"}');
+	INSERT INTO `nyxIn_classes` VALUES(3, 'Moderator', '{"1":"0","2":"0","3":"0","4":"1","5":"0","6":"0","7":"0","8":"0"}');
+
+	CREATE TABLE `nyxIn_galleries` (
+	`id` int(11) NOT NULL AUTO_INCREMENT,
+	`parent_id` int(11) NOT NULL,
+	`order_int` int(11) NOT NULL,
+	`thumbnail` varchar(100) NOT NULL,
+	`name` varchar(32) CHARACTER SET latin1 NOT NULL,
+	`description` text CHARACTER SET latin1 NOT NULL,
+	`locked_status` tinyint(1) NOT NULL,
+	`password` varchar(32) NOT NULL,
+	PRIMARY KEY (`id`)
+	) ENGINE=InnoDB DEFAULT CHARSET=utf32 AUTO_INCREMENT=1 ;
+
+	CREATE TABLE `nyxIn_images` (
+	`id` int(11) NOT NULL AUTO_INCREMENT,
+	`gallery_id` int(11) NOT NULL,
+	`moderation_status` tinyint(1) NOT NULL,
+	`order_int` int(11) NOT NULL,
+	`upload_timestamp` int(11) NOT NULL,
+	`views` int(100) NOT NULL,
+	`filename` varchar(32) NOT NULL,
+	`safename` varchar(100) NOT NULL,
+	`fileextension` varchar(32) NOT NULL,
+	`filesize` int(11) NOT NULL,
+	`name` varchar(32) NOT NULL,
+	`description` text NOT NULL,
+	PRIMARY KEY (`id`)
+	) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+	CREATE TABLE `nyxIn_permissions` (
+	`id` int(11) NOT NULL AUTO_INCREMENT,
+	`name` varchar(32) NOT NULL,
+	`shorthand` varchar(32) NOT NULL,
+	PRIMARY KEY (`id`),
+	UNIQUE KEY `shorthand_name` (`shorthand`),
+	UNIQUE KEY `name` (`name`)
+	) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
+
+	INSERT INTO `nyxIn_permissions` VALUES(1, 'Upload Images', 'upload');
+	INSERT INTO `nyxIn_permissions` VALUES(2, 'Manage Galleries', 'galleries_management');
+	INSERT INTO `nyxIn_permissions` VALUES(3, 'Customize Galleries', 'gallery_customization');
+	INSERT INTO `nyxIn_permissions` VALUES(4, 'Moderate Images', 'moderate_images');
+	INSERT INTO `nyxIn_permissions` VALUES(5, 'Manage Staff Classes', 'manage_staff_classes');
+	INSERT INTO `nyxIn_permissions` VALUES(6, 'Manage Staff', 'manage_staff');
+	INSERT INTO `nyxIn_permissions` VALUES(7, 'Preferences', 'preferences');
+	INSERT INTO `nyxIn_permissions` VALUES(8, 'Reset nyxIn', 'reset');
+
+	CREATE TABLE `nyxIn_preferences` (
+	`id` int(11) NOT NULL AUTO_INCREMENT,
+	`preference` varchar(32) NOT NULL,
+	`shorthand` varchar(32) NOT NULL,
+	`description` text NOT NULL,
+	`accepted_values` text NOT NULL,
+	`value` varchar(32) NOT NULL,
+	PRIMARY KEY (`id`)
+	) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+
+	INSERT INTO `nyxIn_preferences` VALUES(1, 'Timestamp', 'timestamp', 'Unix timestamp of last nyxIn installation reset.', 'Unix Timestamp', '1342152869');
+	INSERT INTO `nyxIn_preferences` VALUES(2, 'Maintenance Mode', 'maintenance_mode', 'Activate or Deacivate Maintenence Mode. During maintenance mode, only logged-in staff can browse the gallery.', '0 or 1', '1');
+	INSERT INTO `nyxIn_preferences` VALUES(3, 'Number of Columns', 'cols', 'Number of columns of images and sub-galleries displayed.', 'Any integer', '5');
+	INSERT INTO `nyxIn_preferences` VALUES(4, 'Moderated Image Only', 'display_moderated_only', 'Only staff-moderated images are displayed in the gallery.', '0 or 1', '1');
+	INSERT INTO `nyxIn_preferences` VALUES(5, 'Thumbnail Length', 'thumbnail_length', 'The length in pixels of the square thumbnail image produced by nyxIn. Please refrain from changing this unless nyxIn has been image/gallery reset or if this is a fresh copy of nyxIn.', 'Any integer.', '450');
+
+	CREATE TABLE `nyxIn_staff` (
+	`id` int(11) NOT NULL AUTO_INCREMENT,
+	`class_id` int(11) NOT NULL,
+	`username` varchar(32) NOT NULL,
+	`password_hash` varchar(40) NOT NULL,
+	PRIMARY KEY (`id`),
+	UNIQUE KEY `username` (`username`)
+	) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+	INSERT INTO `nyxIn_staff` VALUES(1, 1, 'Admin', '516b9783fca517eecbd1d064da2d165310b19759');
+=======================================================================================================================================
+  Last Updated: July 13, 12

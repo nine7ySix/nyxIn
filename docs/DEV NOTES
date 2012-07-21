@@ -1,0 +1,93 @@
+
+                        nyxIn Dev Notes
+
+  What is it?
+  -----------
+
+  This file includes several important notes about how nyxIn works and is
+  intended for developers who wish to build upon or customize nyxIn.
+  Although you may choose to not follow the conventions used by nyxIn, 
+  however, it is recommended as it keeps the code consistent and decreases
+  the chance of nyxIn affecting the website due to variable name clashes.
+
+  Ajaxed Files
+  ------------
+  ----------------------------
+  | nyxIn/ajax.php           |
+  | nyxIn/index.php          |
+  | nyxIn/main.php           |
+  | nyxIn/core/functions.php |
+  ----------------------------
+  ----------------------------
+  These files are either Ajaxed into the actual website, 'require'd by the
+  actual website, or are important to that process. The code here should be
+  kept consistent in order to minimize the chance of a variable name collision
+  and it is also a good habit to keep everything consistent.
+            
+            = Convensions =
+  
+  VARIABLES+FORMDATA/OBJECTS
+  -----------------
+  VARIABLES
+  ---------
+  Prefix: $nyxIn_Var_
+        -- BASIC VARIABLE
+              Name: [Variable Name]
+        -- DATA FROM DATABASE
+              Name: [TableName]_[ColumnName]
+  FORMDATA
+  --------
+  Prefix: $nyxIn_Frm_
+  Name: [Variable Name]
+
+  OBJECTS
+  -------
+  Prefix: $nyxIn_Obj_
+        -- DATA FROM DATABASE
+              Name: [TableName]
+
+  SQL QUERY
+  ---------
+  Prefix: $nyxIn_Query_
+        -- SELECT * QUERY
+              Name: SelectMetadataFrom_[tablename]
+                SELECT [shorthand of table].* FROM ".$nyxIn['db_prefix']."[tablename] AS [shorthand of table]
+        
+        -- SELECT SPECIFIC COLUMN QUERY
+              Name: Select[Column]From_[tablename]
+                SELECT [shorthand of table].[Column] FROM ".$nyxIn['db_prefix']."[tablename] AS [shorthand of table]
+       
+        -- UPDATE QUERY
+              Name: Update_[tablename]  // Use this convension if it's ever needed
+                UPDATE ".$nyxIn['db_prefix']."[tablename] SET [column]='[var]' WHERE id='[RowId]'
+
+      
+        -- DELETE QUERY
+            Name: DeleteFrom_[tablename]
+
+  Admin Related Files
+  -------------------
+  ----------------------------------------------
+  | nyxIn/admin.php                            |
+  | nyxIn/uploadHandler.php                    |  
+  | nyxIn/admin/failure_check.php              |
+  | nyxIn/admin/galleries_management.php       |
+  | nyxIn/admin/gallery_customization.php      |
+  | nyxIn/admin/index.php                      |
+  | nyxIn/admin/manage_staff.php               |
+  | nyxIn/admin/manage_staff_classes.php       |
+  | nyxIn/admin/moderate_images.php            |
+  | nyxIn/admin/permission_error.php           |
+  | nyxIn/admin/preferences.php                |
+  | nyxIn/admin/reset.php                      |
+  | nyxIn/admin/upload.php                     |
+  | nyxIn/admin/upload_assets/fileuploader.css |
+  | nyxIn/admin/upload_assets/fileuploader.js  |
+  ----------------------------------------------
+  ----------------------------------------------
+  These files are independent of the actual website, so there is no need to 
+  place prefixes in front of the variable names. A page and an action are
+  declared using GET and the files inside in nyxIn/admin/ validate specific,
+  expected inputs, so there will never be unintended conflicts.
+
+  Last Updated: July 12, 12

@@ -1,0 +1,45 @@
+
+                        nyxIn
+
+  What is it?
+  -----------
+
+  nyxIn, or nyxIntegrated, is a gallery plugin that is designed to 
+  blend into a website by adapting most of the website's existing CSS
+  file. The gallery itself is dynamic due to the use of Ajax and
+  features an easy drag and drop upload process (credited to Andrew
+  Valums). It has an incredibly easy installation process and during
+  development, was tested on various free CSS templates found online
+  in order to ensure it's quality and compatibility.
+
+  The Latest Version
+  ------------------
+
+  Details of the latest version can be found on the {fuzzicode}
+  nyxIn project page under http://nyxIn.fuzzicode.com/.
+
+  Documentation
+  -------------
+
+  The documentation available as of the date of this release is
+  included in HTML format in the docs/manual/ directory. The most
+  up-to-date documentation can be found at
+  http://nyxIn.fuzzicode.com/doc.
+
+  Installation
+  ------------
+
+  Please see the file called INSTALL.
+
+  Licensing
+  ---------
+
+  Please see the file called LICENSE.
+
+  Contacts
+  --------
+
+   o For all queries, you can contact me at nine7ySix@gmail.com
+     or through the contact form on http://fuzzicode.com/contact
+
+  Last Updated: July 13, 12

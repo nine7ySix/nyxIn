@@ -1,0 +1,49 @@
+#nyxIn {
+	padding:0;
+}
+
+#nyxIn p.staff_notification {
+	padding:10px;
+	background-color:#FE493C;
+	color:#FFF;
+	font-weight: bold;
+	text-align:center;
+}
+
+#nyxIn p.galleryDescription {
+	border:1px solid #999;
+	border-radius:5px;
+	background-color:#E6E6E6;
+	padding:2px;
+	font-style:italic;
+}
+
+#nyxIn .ajaxed {
+	cursor:pointer;
+}
+
+#nyxIn .ajaxed:hover {
+	text-decoration:underline;;
+}
+
+#nyxIn .top15 {
+	margin:0;
+	font-weight:bold;
+	text-align:center;
+}
+
+#nyxIn .subgallery {
+	display:block;
+	text-align:center;
+}
+
+#nyxIn table tr td {
+	margin:0;
+	padding:0;
+}
+
+#nyxIn #nyxIn_Footer {
+	margin:10px 0 10px 0;
+	border-top:1px solid #E4E4E4;
+	text-align:center;
+}
