@@ -59,28 +59,34 @@ $nyxIn_Frm_ajaxed_id = $_POST['id'];
 	<tr>
 		<?php
 		if($nyxIn['preferences']['display_moderated_only']==0) {
-			$nyxIn_Query_SelectTop15 = $nyxIn['db']->query("SELECT * FROM ".$nyxIn['db_prefix']."images WHERE deleted_status='0' ORDER BY views DESC LIMIT 0, 15") or die($nyxIn['db']->error);
+			$nyxIn_Query_SelectTop15 = $nyxIn['db']->query("SELECT * FROM ".$nyxIn['db_prefix']."images AS i,".$nyxIn['db_prefix']."galleries AS g WHERE i.deleted_status='0' AND i.gallery_id=g.id AND g.password_status='0' ORDER BY views DESC") or die($nyxIn['db']->error);
 		} else if($nyxIn['preferences']['display_moderated_only']==1) {
-			$nyxIn_Query_SelectTop15 = $nyxIn['db']->query("SELECT * FROM ".$nyxIn['db_prefix']."images WHERE moderation_status=1 AND deleted_status='0' ORDER BY views DESC LIMIT 0, 15") or die($nyxIn['db']->error);
+			$nyxIn_Query_SelectTop15 = $nyxIn['db']->query("SELECT * FROM ".$nyxIn['db_prefix']."images AS i,".$nyxIn['db_prefix']."galleries AS g WHERE i.deleted_status='0' AND i.gallery_id=g.id AND g.locked_status='0' AND i.moderation_status=1 ORDER BY views DESC") or die($nyxIn['db']->error);
 		}
 
 		$nyxIn_ViewOrder = 0;
 		while($row = $nyxIn_Query_SelectTop15->fetch_object()) {
-			$views = $row->views;
-			$safename = $row->safename."_thumb.".$row->fileextension;
-			?>
-			<td width="20%" valign="top">
-				<p class="top15">#<?php echo $nyxIn_ViewOrder+1;?></p>
-				<span class="ajaxed" onClick="nyxIn_Ajax_Views('i', <?php echo $row->id ?>,'')">
-					<img src="<?php echo $nyxIn['dir']; ?>/uploads/<?php echo $safename; ?>" width="100%">
-					<p class="top15">Views: <?php echo $views ?></p>
-				</span>
-			</td>
-			<?php
-			$nyxIn_ViewOrder++;
-			
-			if($nyxIn_ViewOrder%5==0) {
-				echo "</tr><tr>";
+			if(nyxIsFreeGallery($row->gallery_id)==true) {
+				$views = $row->views;
+				$safename = $row->safename."_thumb.".$row->fileextension;
+				?>
+				<td width="20%" valign="top">
+					<p class="top15">#<?php echo $nyxIn_ViewOrder+1;?></p>
+					<span class="ajaxed" onClick="nyxIn_Ajax_Views('i', <?php echo $row->id ?>,'')">
+						<img src="<?php echo $nyxIn['dir']; ?>/uploads/<?php echo $safename; ?>" width="100%">
+						<p class="top15">Views: <?php echo $views ?></p>
+					</span>
+				</td>
+				<?php
+				$nyxIn_ViewOrder++;
+				
+				if($nyxIn_ViewOrder%5==0) {
+					echo "</tr><tr>";
+				}
+
+				if($nyxIn_ViewOrder>15) {
+					break;
+				}
 			}
 		}
 		echo str_repeat("<td width='20%' valign='top'></td>", 5-(($nyxIn_ViewOrder-1)+5)%5);			

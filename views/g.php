@@ -17,22 +17,16 @@ if(!$nyxIn_Frm_ajaxed_id==0) {
 	$nyxIn_Var_galleries_password = $nyxIn_Obj_galleries->password;
 
 	nyxInFormatTitle($nyxIn_Var_galleries_id, 0);
-	
 	if($nyxIn_Var_galleries_locked_status==1) {
-		if(isset($_POST['nyxIn_Frm_gallery_password'])) {
-			$nyxIn_Frm_gallery_password = $_POST['nyxIn_Frm_gallery_password'];
+		if(isset($_POST['password'])) {
+			$nyxIn_Frm_gallery_password = $_POST['password'];
 		} else {
 			$nyxIn_Frm_gallery_password = 0;
 		}
-		if($nyxIn_Frm_gallery_password!="") {
-			if($nyxIn_Frm_gallery_password==$nyxIn_Var_galleries_password) {
-				echo "<p>Authentication successful.</p>";
-				$nyxIn_Var_has_access_to_gallery=1;
-			} else {
-				echo "<p>The password entered was incorrect.</p>";
-				$nyxIn_Var_has_access_to_gallery=0;
-			}
-		} else {					
+
+		if(nyxInVerifyPassword($nyxIn_Var_galleries_id, $nyxIn_Frm_gallery_password)==true) {
+			$nyxIn_Var_has_access_to_gallery=1;
+		} else {
 			$nyxIn_Var_has_access_to_gallery=0;
 		}
 	} else {
@@ -72,7 +66,7 @@ if($nyxIn_Var_has_access_to_gallery==1) {
 				}
 
 				echo "<td width='".$nyxIn['preferences']['colsPercentage']."%' valign='top'>";
-					echo "<span class='ajaxed subgallery' onClick=\"nyxIn_Ajax_Views('g', ".$row->id.",'')\">";
+					echo "<span class='ajaxed subgallery' onClick=\"nyxIn_Ajax_Views('g', ".$row->id.",nyxIn_gallery_password)\">";
 						echo "<img src='".$nyxIn_gallery_thumbnailurl."' width='100%'>";
 						echo "<br>";
 						echo $row->name;
@@ -103,7 +97,7 @@ if($nyxIn_Var_has_access_to_gallery==1) {
 			while($row = $nyxIn_Query_SelectMetadataFrom_galleries->fetch_object()) {
 				$nyxIn_Var_galleries_filename = $row->safename."_thumb.".$row->fileextension;
 				echo "<td width='".$nyxIn['preferences']['colsPercentage']."%' valign='top'>";
-					echo "<span class='ajaxed' onClick=\"nyxIn_Ajax_Views('i', ".$row->id.",'')\">";
+					echo "<span class='ajaxed' onClick=\"nyxIn_Ajax_Views('i', ".$row->id.",nyxIn_gallery_password)\">";
 						echo "<img src='".$nyxIn['dir']."/uploads/$nyxIn_Var_galleries_filename' width='100%'>";
 					echo "</span>";
 				echo "</td>";
@@ -118,10 +112,7 @@ if($nyxIn_Var_has_access_to_gallery==1) {
 	}
 } else {
 	?>
-	<form name="nyxInGallery_gallery_access" method="post">
 		<p>This gallery is locked with a password.</p>
-		<input type="hidden" name="nyxInGalleryId" value="<?php echo $nyxIn_Var_galleries_id ?>">
-		<input type="text" name="nyxIn_Frm_gallery_password"> <input type="submit" value="Authenticate">
-	</form>
+		<input type="text" name="nyxIn_Frm_gallery_password" class="nyxIn_Frm_gallery_password"> <input type="button" value="Authenticate" onClick="nyxIn_Ajax_Views('g', <?php echo $nyxIn_Var_galleries_id ?>, $('input.nyxIn_Frm_gallery_password').val())">
 	<?php
 }

@@ -2,6 +2,29 @@
 
 						nyxIn Changelog
 
+0.9
+-----------
+July 21, 2012
+	[Notes]
+
+	[Additions]
+	    - Added dynamic locked gallery authentication
+	    - Ajax functions now secured
+
+	[Changes]
+		- Top 15 images on {s} fixed to show only unlocked images
+		- Version removed from footer
+
+	[Bugs Fixes]
+
+	[Planned] (No order of priority)
+		- Re-clean up code for version 1.0
+		- Window Mode
+		- Seperate individual actions permissions
+		- Fix Time issue on {s}
+		- Add Installation process
+        - Implement download option ("http://en.php.net/manual/en/class.ziparchive.php")
+
 0.8
 -----------
 July 21, 2012
